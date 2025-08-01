@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'ProviderExample.dart';
+import 'StateNotifierProviderExample.dart';
 import 'StateProviderExample.dart';
 
 void main()
@@ -15,7 +16,7 @@ void main()
         ),),
       title: "Form",
       debugShowCheckedModeBanner: false,
-      home: Example2(),
+      home: Example3(),
     ),
   ));
 }
