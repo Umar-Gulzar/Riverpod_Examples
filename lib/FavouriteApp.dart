@@ -49,7 +49,15 @@ class FavouriteNotifier extends StateNotifier<FavouriteState>
   void addItem(Item i)
   {
     List<Item> it=[...state.allItems];
-    it.add(i);
+    it=[
+      Item(item:"Apple",id:1,isFavourite:true),
+      Item(item:"Banana",id:2,isFavourite:false),
+      Item(item:"Orange",id:3,isFavourite:false),
+      Item(item:"Grapes",id:4,isFavourite:true),
+      Item(item:"Mango",id:5,isFavourite:false),
+      Item(item:"Tomato",id:6,isFavourite:true),
+    ];
+   // it.add(i);
     state=state.copyWith(allItem:it);
   }
   void deleteItem(int id)
@@ -75,12 +83,45 @@ class FavouriteNotifier extends StateNotifier<FavouriteState>
   }
   void filter(String name)
   {
-    List<Item> filtered=[];
-    for(int i=0;i<state.allItems.length;i++)
+    if(name.isEmpty)
+      state=state.copyWith(fillteredItem: state.allItems);
+    else
     {
-      if(state.allItems[i].item.toLowerCase().contains(name.toLowerCase())==true)
-        filtered.add(state.allItems[i]);
+      List<Item> filtered = [];
+      for (int i = 0; i < state.allItems.length; i++) {
+        if (state.allItems[i].item.toLowerCase().contains(name.toLowerCase()) ==
+            true)
+          filtered.add(state.allItems[i]);
+      }
+      state = state.copyWith(fillteredItem: filtered);
     }
-    state=state.copyWith(fillteredItem: filtered);
+  }
+}
+
+
+class Fav extends ConsumerWidget
+{
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final data=ref.watch(favouriteProvider.select((state)=>state.fillteredItems));
+    return Scaffold(
+      body: Container(
+        child: ListView.builder(
+          itemCount:data.length ,
+            itemBuilder: (context,index)
+            {
+              return ListTile(
+                title: Text(data[index].item),
+                trailing: Icon(
+                  data[index].isFavourite?Icons.favorite:Icons.favorite_border,
+                ),
+                leading: TextButton(onPressed: () {
+                  ref.read(favouriteProvider.notifier).deleteItem(data[index].id);
+                },
+                 child:Icon(Icons.delete)),
+              );
+            }
+      ),
+    );
   }
 }
