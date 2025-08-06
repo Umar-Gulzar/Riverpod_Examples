@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'FutureProviderExample.dart';
 import 'ProviderExample.dart';
 import 'StateNotifierProviderExample.dart';
 import 'StateProviderExample.dart';
 import 'FavouriteApp.dart';
+import 'StreamProviderExample.dart';
 
 void main()
 {
@@ -17,7 +19,7 @@ void main()
         ),),
       title: "Form",
       debugShowCheckedModeBanner: false,
-      home: Fav(),
+      home: Str(),
     ),
   ));
 }
