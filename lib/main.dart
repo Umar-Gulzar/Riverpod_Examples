@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'ProviderExample.dart';
 import 'StateNotifierProviderExample.dart';
 import 'StateProviderExample.dart';
+import 'FavouriteApp.dart';
 
 void main()
 {
@@ -16,7 +17,7 @@ void main()
         ),),
       title: "Form",
       debugShowCheckedModeBanner: false,
-      home: Example3(),
+      home: Fav(),
     ),
   ));
 }
